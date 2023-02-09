@@ -45,18 +45,21 @@ public class Act4_3 {
     }
     
     public static void getAllTeachers() {
-        Teachers[] dep = QueryTeach.getAllTeachers();
-        for (int i = 0; i < dep.length; i++) {
-            QueryTeach.showTeacher(dep[i]);
+        Teachers[] teach = QueryTeach.getAllTeachers();
+        for (int i = 0; i < teach.length; i++) {
+            QueryTeach.showTeacher(teach[i]);
         }
     }
     
     public static void getMostVeteranTeacher() {
-        Teachers teacher;
-        
-        teacher = QueryTeach.getMostVeteranTeacher();
         System.out.println("----MOST VETERAN TEACHER----");
-        System.out.println(teacher.toString());
+        QueryTeach.showTeacher(QueryTeach.getMostVeteranTeacher());
+    }
+    
+    public static void setSalary() {
+        System.out.println("\nSet the new salary: ");
+        int salary = tcl.nextInt();
+        QueryTeach.setSalary(salary);
     }
     
     public static void main(String[] args) {
@@ -88,6 +91,7 @@ public class Act4_3 {
                     salaryofDepartment();
                     break;
                 case 4:
+                    salaryPerDept();
                     break;
                 case 5:
                     getAllTeachers();
@@ -96,6 +100,7 @@ public class Act4_3 {
                     getMostVeteranTeacher();
                     break;
                 case 7:
+                    setSalary();
                     break;
                 case 8:
                     break;
@@ -103,6 +108,8 @@ public class Act4_3 {
                     break;
                 case 10:
                     System.out.println("Bye!");
+                    QueryTeach.closeConnection();
+                    QueryDep.closeConnection();
                     break;
                 default:
                     System.out.println("Select a valid option");

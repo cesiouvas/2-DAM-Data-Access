@@ -96,7 +96,8 @@ public class Teachers implements java.io.Serializable {
                 + "\nsurname = " + surname
                 + "\nemail = " + email
                 + "\nstartDate = " + startDate
-                + "\nsalary = " + salary + '}'
-                + "\ndepartments = " + departments;
+                + "\nsalary = " + salary
+                + "\ndepartments = " + departments.getName() + "\n"
+                + "-----------------------";
     }
 }
