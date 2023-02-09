@@ -62,6 +62,34 @@ public class Act4_3 {
         QueryTeach.setSalary(salary);
     }
     
+    public static void riseSeniorSalary() {
+        System.out.println("---RISE SALARY OF SENIORS---");
+        boolean cont = false;
+        int year, salary;
+        
+        while (!cont) {
+            try {
+                System.out.println("Number of years to be a senior:");
+                year = tcl.nextInt();
+                System.out.println("% to raise:");
+                salary = tcl.nextInt();
+                QueryTeach.riseSeniorSalary(year, salary);
+                System.out.println("\nSalary raised!");
+                cont = true;
+            } catch (Exception e) {
+                System.out.println("(!) Introduce a correct value (number)");
+                tcl.next();
+            }
+        }
+    }
+    
+    public static void deleteTeacher() {
+        System.out.println("---DELETE TEACHER---");
+        System.out.println("Introduce the name of the department:");
+        QueryTeach.deleteTeachersOfDepartment(txt.nextLine());
+        System.out.println("(+) Teachers deleted");
+    }
+    
     public static void main(String[] args) {
         int opc;
         
@@ -103,8 +131,10 @@ public class Act4_3 {
                     setSalary();
                     break;
                 case 8:
+                    riseSeniorSalary();
                     break;
                 case 9:
+                    deleteTeacher();
                     break;
                 case 10:
                     System.out.println("Bye!");

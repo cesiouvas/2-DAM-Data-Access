@@ -52,11 +52,55 @@ public class QueryTeach {
             sesion.close();
             return modifiedSalary;
         } catch (Exception e) {
-            System.out.println("(!) Errir while updating salary");
+            System.out.println("(!) Error while updating salary");
             tx.rollback();
             sesion.close();
         }
         return 0;
+    }
+
+    public static int riseSeniorSalary(int year, int percentage) {
+        Session sesion = sf.openSession();
+        Transaction tx = sesion.beginTransaction();
+
+        try {
+            Query q = sesion.createQuery("update Teachers set salary = salary+((salary*:percentage)/100) "
+                    + "where year(current_date()) - year(startDate) > :year");
+
+            q.setInteger("percentage", percentage);
+            q.setInteger("year", year);
+
+            int modifiedSalary = q.executeUpdate();
+
+            tx.commit();
+            sesion.close();
+            return modifiedSalary;
+        } catch (Exception e) {
+            System.out.println("(!) Error while raising salary");
+            tx.rollback();
+            sesion.close();
+        }
+        return 0;
+    }
+    
+    public static int deleteTeachersOfDepartment(String name) {
+        Session sesion = sf.openSession();
+        Transaction tx = sesion.beginTransaction();
+        
+        try {
+            Query q = sesion.createQuery("delete Teachers te where te.departments.deptNum "
+                    + "in (select d.deptNum from Departments d where d.name = :name)");
+            q.setString("name", name);
+            
+            int modifiedRows = q.executeUpdate();
+            
+            tx.commit();
+            sesion.close();
+            return modifiedRows;
+        } catch (Exception e) {
+            System.out.println("(!) Invalid name");
+        }
+        return 0;        
     }
 
     public static void closeConnection() {
